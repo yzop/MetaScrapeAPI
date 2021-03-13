@@ -16,6 +16,7 @@ app.get('/', async function(request, response)
         response.send(previewData);
     }
     catch(error){
+        console.log(error)
         response.send(JSON.stringify({
             title:'Shit'}));
     }
