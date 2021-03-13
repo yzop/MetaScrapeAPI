@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - "*"
+      - "v*"
 
 jobs:
   Builds:
@@ -27,6 +27,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: Meta Scrape v${{ steps.get_version.outputs.VERSION }}
+          name: Meta Scrape ${{ steps.get_version.outputs.VERSION }}
           files: |
             scrape.tar.gz
