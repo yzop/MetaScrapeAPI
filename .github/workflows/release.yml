@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  Builds:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - uses: actions/checkout@v2
+      - run: docker build . -f builder/Dockerfile -t scrape:latest
+      - run: docker run --name=scrp --rm -dit scrape:latest bash
+      - run: mkdir ./scrape && docker cp scrp:/src/* ./scrape/
+      - run: tar -czf scrape.tar.gz scrape
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Wheel Location
+          path: scrape.tar.gz
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Meta Scrape v${{ steps.get_version.outputs.VERSION }}
+          files: |
+            scrape.tar.gz

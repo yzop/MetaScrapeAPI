@@ -1,0 +1,17 @@
+{
+    "name": "MetaScrape",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": "YZOP",
+    "dependencies": {
+        "express": "^4.17.1",
+        "get-urls": "^10.0.0",
+    	"puppeteer": "^8.0.0",
+    	"puppeteer-extra": "^3.1.17",
+    	"puppeteer-extra-plugin-stealth": "^2.7.5",
+    	"request": "^2.88.2"
+    }
+}
