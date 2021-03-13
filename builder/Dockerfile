@@ -1,4 +1,4 @@
 FROM node:buster
 WORKDIR /
-COPY src/* src/
+COPY src/* /src/
 RUN cd src && yarn
