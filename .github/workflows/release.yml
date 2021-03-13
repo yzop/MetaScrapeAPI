@@ -15,9 +15,9 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - uses: actions/checkout@v2
       - run: docker build . -f builder/Dockerfile -t scrape:latest
-      - run: docker run --name=scrp --rm -dit scrape:latest bash
-      - run: mkdir ./scrape && docker cp scrp:/src/* ./scrape/
-      - run: tar -czf scrape.tar.gz scrape
+      - run: docker run --name=bsdkk --rm -dit scrape:latest bash
+      - run: mkdir ./scrape && docker cp bsdk:/src/ ./scrape/
+      - run: tar -czf scrape.tar.gz scrape/src
       - uses: actions/upload-artifact@v2
         with:
           name: Wheel Location
