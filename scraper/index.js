@@ -21,7 +21,7 @@ app.get('/', async function(request, response)
         response.send(previewData);
     }
     catch(error){
-        console.log(error)
+        console.log('Not a Working URL')
         response.send(JSON.stringify({
             title:'Shit'}));
     }
