@@ -1,4 +1,4 @@
 FROM node:buster
-WORKDIR /
-COPY src/* /src/
-RUN cd /src && yarn
+WORKDIR /scraper
+COPY scraper .
+RUN yarn
