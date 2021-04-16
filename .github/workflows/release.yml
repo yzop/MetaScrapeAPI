@@ -17,11 +17,7 @@ jobs:
       - run: docker build . -f builder/Dockerfile -t scrape:latest
       - run: docker run --name=mscrp --rm -dit scrape:latest bash
       - run: docker cp mscrp:/scraper/ ./
-      - run: tar -czf scrape.tar.gz scraper
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Wheel Location
-          path: scrape.tar.gz
+      - run: tar -czf scrape.tar.gz scraper && tar -cf scrape.tar scraper
       - name: Create Release
         uses: softprops/action-gh-release@v1
         env:
@@ -30,3 +26,4 @@ jobs:
           name: Meta Scrape ${{ steps.get_version.outputs.VERSION }}
           files: |
             scrape.tar.gz
+            scrape.tar
